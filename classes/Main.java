@@ -8,25 +8,26 @@ public class Main {
   
   
   //APLIQUE SINGLETON, REMOVA ESSA DECLARACAO E USO GetInstance nos métodos que chamam db
-  static DataBase db;
+  static DataBase db = DataBase.getInstance();
   static int opcao;
-  static Scanner entrada;
+  static Scanner entrada = new Scanner (System.in);
   //static Nota nota;
 
   public static void main(String[] args) {
-    //REMOVA 
-    db = new DataBase(); 
-    entrada = new Scanner(System.in);
-    
-    //FACA UM MENU PARA SELECIONAR A OPCAO (1 - Prof/ 2- Coord) USANDO A SENHA EM PROFESSOR
-    //MENU
-    menuCoordenador();
-
-    //menuProfessor();
-   
+    selecionarMenu();
     entrada.close();
   }
 
+  public static void selecionarMenu(){
+    System.out.print("Digite a senha para acessar como professor: ");
+    string senha = entrada.next();
+    if (senha.equals("professor")) {
+      menuProfessor();
+    } else {
+      menuCordenador();
+    }
+  }
+   
 public static void menuCoordenador(){
   do { 
     System.out.println("╔═════════════════════════════════════════╗");
