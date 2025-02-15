@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 //APLIQUE SINGLETON NESTA CLASSE
 
-public class DataBase {
+    public class DataBase {
     private static DataBase instance;
     private ArrayList<Aluno> alunos;
     private ArrayList<Professor> professores;
