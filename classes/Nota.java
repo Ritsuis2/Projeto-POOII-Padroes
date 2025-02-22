@@ -8,6 +8,7 @@ private Double nota1;
 private Double nota2;
 private Double nota3;
 private Double notaRecuperacao;
+private boolean bloqueado = false;
 private List<ElementList> observers = new ArrayList<>();
   
   public Nota(){
@@ -81,7 +82,7 @@ public void setNotaRecuperacao(double nota){
   this.notaRecuperacao = nota;
   notifyObservers();
 }
-@Override
+
 public String toString(){
   return this.nota1 + " , " + this.nota2 + " " + this.nota3;
 }
@@ -96,6 +97,6 @@ public String toString(){
 
   private void notifyObservers() {
         for (ElementList observer : observers) {
-            observer.update(this);
+            observer.update(this, this.bloqueado); 
 
 }
