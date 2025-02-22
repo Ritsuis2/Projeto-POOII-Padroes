@@ -1,10 +1,14 @@
 package classes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Nota {
 private Double nota1;
 private Double nota2;
 private Double nota3;
 private Double notaRecuperacao;
+private List<ElementList> observers = new ArrayList<>();
   
   public Nota(){
    this.nota1 = 0.0;
@@ -27,6 +31,7 @@ public Double getNota1() {
 
 public void setNota1(Double nota1) {
   this.nota1 = nota1;
+  notifyObservers();
 }
 
 
@@ -37,6 +42,7 @@ public Double getNota2() {
 
 public void setNota2(Double nota2) {
   this.nota2 = nota2;
+  notifyObservers();
 }
 
 
@@ -46,6 +52,7 @@ public Double getNota3() {
 
 public void setNota3(Double nota3) {
   this.nota3 = nota3;
+  notifyObservers();
 }
 
 
@@ -72,10 +79,23 @@ public boolean verificarSituacao() {
 
 public void setNotaRecuperacao(double nota){
   this.notaRecuperacao = nota;
+  notifyObservers();
 }
 @Override
 public String toString(){
   return this.nota1 + " , " + this.nota2 + " " + this.nota3;
 }
+
+  public void addObserver(ElementList observer) {
+        this.observers.add(observer);
+    }
+
+  public void removeObserver(ElementList observer) {
+        this.observers.remove(observer);
+    }
+
+  private void notifyObservers() {
+        for (ElementList observer : observers) {
+            observer.update(this);
 
 }
