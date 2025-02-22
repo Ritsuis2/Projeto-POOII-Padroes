@@ -98,5 +98,6 @@ public String toString(){
   private void notifyObservers() {
         for (ElementList observer : observers) {
             observer.update(this, this.bloqueado); 
-
+       }
+    }
 }
