@@ -82,6 +82,12 @@ public void setNotaRecuperacao(double nota){
   this.notaRecuperacao = nota;
   notifyObservers();
 }
+      public void setAtivo(boolean ativo) {
+      this.ativo = ativo;
+      notifyObservers();
+        System.out.println("Estado 'ativo' alterado para: " + ativo);
+    }
+
 
 public String toString(){
   return this.nota1 + " , " + this.nota2 + " " + this.nota3;
