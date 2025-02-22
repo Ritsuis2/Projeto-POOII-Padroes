@@ -1,0 +1,40 @@
+package classes;
+
+public class Semestre {
+
+    private String nome;
+    private boolean ativo;
+
+    public Semestre(String nome, boolean ativo) {
+        this.nome = nome;
+        this.ativo = ativo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public void mostrarInfo() {
+        System.out.println("Semestre: " + nome + " | Ativo: " + (ativo ? "Sim" : "Não"));
+    }
+
+    public static void main(String[] args) {
+        Semestre semestre1 = new Semestre("2024.2", true);
+        semestre1.mostrarInfo();
+
+        semestre1.setAtivo(false);
+        System.out.println("Semestre atualizado: " + semestre1.isAtivo());
+    }
+}
