@@ -1,8 +1,10 @@
+
 package classes;
 
 import java.net.ProtocolFamily;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class Main {
 
@@ -13,6 +15,55 @@ public class Main {
     //static Nota nota;
 
     public static void main(String[] args) {
+
+                entrada = new Scanner(System.in);
+            db =  DataBase.getInstance()
+            
+            db.exportarDadosEStudante();
+
+            menuCoordenador();
+
+            entrada.close();
+
+    }
+
+    public static void menuCoordenador() {
+
+        System.out.println("Selecione a opção:");
+        System.out.println("1- Acessar como Coordenador");
+        System.out.println("2 - Acessar como Professor");
+
+        opcao =  entrada.nextInt();
+        entrada.nextLine();
+
+        switch (opcao) {
+            case 1: 
+                System.out.println("Você escolheu Coordenador");
+                break;
+
+            case 2:
+                menuProfessor();
+                break;
+            default:
+                System.out.println("opção inavlidade!");
+                menuCoordenador();
+                break;
+               
+
+        }
+
+        public static void menuProfessor() {
+            System.out.println("Digite a senha do professor");
+            String senha = entrada.nextLine();
+
+            if(senha.equals("senhaProfessor")) {
+                System.out.println(" Senha correta! Acessando menu do professor..." );
+
+            } else {
+                System.out.println ("senha Incorreta");
+            }
+        }
+        
 
         ImportDataMEC importador = new ImportDataMEC();
         db.addObserver(importador);
