@@ -37,7 +37,6 @@ public Double getNota1() {
 public void setNota1(Double nota1) {
    if (!bloqueado){
   this.nota1 = nota1;
-  notifyObservers();
   }
 }
 
@@ -50,7 +49,6 @@ public Double getNota2() {
 public void setNota2(Double nota2) {
   if (!bloqueado){
   this.nota2 = nota2;
-  notifyObservers();
     }
 }
 
@@ -62,7 +60,6 @@ public Double getNota3() {
 public void setNota3(Double nota3) {
    if (!bloqueado){
   this.nota3 = nota3;
-  notifyObservers();
   }
 }
 
@@ -90,11 +87,10 @@ public boolean verificarSituacao() {
 
 public void setNotaRecuperacao(double nota){
   this.notaRecuperacao = nota;
-  notifyObservers();
 }
       public void setAtivo(boolean ativo) {
       this.ativo = ativo;
-      notifyObservers();
+
         System.out.println("Estado 'ativo' alterado para: " + ativo);
     }
 
