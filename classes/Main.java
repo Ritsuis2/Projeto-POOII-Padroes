@@ -17,9 +17,9 @@ public class Main {
     public static void main(String[] args) {
 
                 entrada = new Scanner(System.in);
-            db =  DataBase.getInstance()
+            db =  DataBase.getInstance();
             
-            db.exportarDadosEStudante();
+            db.exportarDadosEstudante();
 
             menuCoordenador();
 
@@ -27,7 +27,7 @@ public class Main {
 
     }
 
-    public static void menuCoordenador() {
+    public static void menuPrincipal() {
 
         System.out.println("Selecione a opção:");
         System.out.println("1- Acessar como Coordenador");
@@ -49,10 +49,10 @@ public class Main {
                 menuCoordenador();
                 break;
                
-
+            }
         }
 
-        public static void menuProfessor() {
+        public static void menuSenhaProfessor() {
             System.out.println("Digite a senha do professor");
             String senha = entrada.nextLine();
 
