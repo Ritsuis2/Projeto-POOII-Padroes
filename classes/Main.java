@@ -5,488 +5,479 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-  
-  
-  //APLIQUE SINGLETON, REMOVA ESSA DECLARACAO E USO GetInstance nos métodos que chamam db
-  static DataBase db = DataBase.getInstance();
-  static int opcao;
-  static Scanner entrada = new Scanner (System.in);
-  //static Nota nota;
 
-  public static void main(String[] args) {
+    //APLIQUE SINGLETON, REMOVA ESSA DECLARACAO E USO GetInstance nos métodos que chamam db
+    static DataBase db = DataBase.getInstance();
+    static int opcao;
+    static Scanner entrada = new Scanner(System.in);
+    //static Nota nota;
 
-    ImportDataMEC importador = new ImportDataMEC();
-    db.addObserver(importador);
-    
-    selecionarMenu();
-    entrada.close();
-  }
+    public static void main(String[] args) {
 
-  public static void selecionarMenu(){
-    System.out.print("Digite a senha para acessar como professor: ");
-    string senha = entrada.next();
-    if (senha.equals("professor")) {
-      menuProfessor();
-    } else {
-      menuCordenador();
-    }
-  }
-   
-public static void menuCoordenador(){
-  do { 
-    System.out.println("╔═════════════════════════════════════════╗");
-    System.out.println("║                MENU                     ║");
-    System.out.println("╠═════════════════════════════════════════╣");
-    System.out.println("║     1 - Cadastrar um professor          ║");
-    System.out.println("║     2 - Vincular um prof. a turma       ║");
-    System.out.println("║     3 - Cadastrar um estudante          ║");
-    System.out.println("║     4 - Vincular estud. a turma         ║");
-    System.out.println("║     5 - Cadastrar um curso              ║");
-    System.out.println("║     6 - Cadastrar uma turma             ║");
-    System.out.println("║     7 - Cadastrar um coordenador        ║");
-    System.out.println("║  8 - Atribuir notas aos estudantes      ║");
-    System.out.println("║     9 - Mostrar a estatística          ║");
-    System.out.println("║      10 - Lista de recuperação          ║");
-    System.out.println("║          11 - Lista geral               ║");
-    System.out.println("║           12 - Histórico                ║");
-    System.out.println("║             0 - Sair                    ║");
-    System.out.println("╚═════════════════════════════════════════╝");
-    System.out.print("Opção: ");
-    opcao = entrada.nextInt(); 
+        ImportDataMEC importador = new ImportDataMEC();
+        db.addObserver(importador);
 
-    switch (opcao) {
-      case 1:
-        cadastrarProfessor();
-        break;
-      case 2:
-        vincularProfessorTurma();
-        break;
-      case 3:
-        cadastrarAluno();
-        break;
-      case 4:
-        vincularEstudanteTurma();
-        break;
-      case 5:
-        cadastrarCurso();
-        break;
-      case 6:
-        cadastrarTurma();
-        break;
-      case 7:
-        cadastarCoordenador();
-        break;
-      case 8:
-        cadastrarNotas();
-        break;
-      case 9:
-        mostrarEstatistica();
-        break;
-      case 10:
-        exibirListaRecuperacao();
-        break;
-      case 11:
-        exibirListaGeral();
-        break;
-      case 12:
-        exibirHistorico();
-        break;
-      case 0:
-          System.out.println("Saindo...");
-          break;
-        default:
-          System.out.println("Opção inválida!");
-      }
-    } while (opcao != 0);
-
-}
-
-
-public static void menuProfessor(){
-  do { 
-    System.out.println("╔═════════════════════════════════════════╗");
-    System.out.println("║                MENU                     ║");
-    System.out.println("╠═════════════════════════════════════════╣");
-    System.out.println("║  1 - Atribuir notas aos estudantes      ║");
-    System.out.println("║     2 - Mostrar a estatística           ║");
-    System.out.println("║      3 - Lista de recuperação           ║");
-    System.out.println("║           4 - Histórico                 ║");
-    System.out.println("║             0 - Sair                    ║");
-    System.out.println("╚═════════════════════════════════════════╝");
-    System.out.print("Opção: ");
-    opcao = entrada.nextInt(); 
-
-    switch (opcao) {
-      
-      case 1:
-        cadastrarNotas();
-        break;
-      case 2:
-        mostrarEstatistica();
-        break;
-      case 3:
-        exibirListaRecuperacao();
-        break;
-      case 4:
-        exibirHistorico();
-        break;
-      case 0:
-          System.out.println("Saindo...");
-          break;
-        default:
-          System.out.println("Opção inválida!");
-      }
-    } while (opcao != 0);
-
-}
-
-
-public static void cadastarCoordenador(){
-  
-  System.out.println("Lista de professores:");
-    for (int i = 0; i < db.getProfessores().size(); i++) {
-        System.out.printf("%d - %s\n", i + 1, db.getProfessores().get(i).getNome());
+        selecionarMenu();
+        entrada.close();
     }
 
-    System.out.print("Escolha o professor coordenador: ");
-    int escolhaProfessor = entrada.nextInt();
-
-    if (escolhaProfessor < 0 || escolhaProfessor > db.getProfessores().size()-1) {
-        System.out.println("Escolha inválida.");
-        return;
+    public static void selecionarMenu() {
+        System.out.print("Digite a senha para acessar como professor: ");
+        String senha = entrada.next();
+        if (senha.equals("professor")) {
+            menuProfessor();
+        } else {
+            menuCoordenador();
+        }
     }
 
-    System.out.print("Escolha o curso para vinculá-lo como coordenador: ");
-    for (int i = 0; i < db.getCursos().size(); i++) {
-      System.out.printf("%d - %s\n", i + 1, db.getCursos().get(i).getNomeCurso());
+    public static void menuCoordenador() {
+        do {
+            System.out.println("╔═════════════════════════════════════════╗");
+            System.out.println("║                MENU                     ║");
+            System.out.println("╠═════════════════════════════════════════╣");
+            System.out.println("║     1 - Cadastrar um professor          ║");
+            System.out.println("║     2 - Vincular um prof. a turma       ║");
+            System.out.println("║     3 - Cadastrar um estudante          ║");
+            System.out.println("║     4 - Vincular estud. a turma         ║");
+            System.out.println("║     5 - Cadastrar um curso              ║");
+            System.out.println("║     6 - Cadastrar uma turma             ║");
+            System.out.println("║     7 - Cadastrar um coordenador        ║");
+            System.out.println("║  8 - Atribuir notas aos estudantes      ║");
+            System.out.println("║     9 - Mostrar a estatística          ║");
+            System.out.println("║      10 - Lista de recuperação          ║");
+            System.out.println("║          11 - Lista geral               ║");
+            System.out.println("║           12 - Histórico                ║");
+            System.out.println("║             0 - Sair                    ║");
+            System.out.println("╚═════════════════════════════════════════╝");
+            System.out.print("Opção: ");
+            opcao = entrada.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    cadastrarProfessor();
+                    break;
+                case 2:
+                    vincularProfessorTurma();
+                    break;
+                case 3:
+                    cadastrarAluno();
+                    break;
+                case 4:
+                    vincularEstudanteTurma();
+                    break;
+                case 5:
+                    cadastrarCurso();
+                    break;
+                case 6:
+                    cadastrarTurma();
+                    break;
+                case 7:
+                    cadastarCoordenador();
+                    break;
+                case 8:
+                    cadastrarNotas();
+                    break;
+                case 9:
+                    mostrarEstatistica();
+                    break;
+                case 10:
+                    exibirListaRecuperacao();
+                    break;
+                case 11:
+                    exibirListaGeral();
+                    break;
+                case 12:
+                    exibirHistorico();
+                    break;
+                case 0:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        } while (opcao != 0);
+
     }
-    int escolhaCurso = entrada.nextInt();
 
-    if (escolhaCurso < 0 || escolhaCurso > db.getCursos().size()-1) {
-        System.out.println("Escolha inválida.");
-        return;
+    public static void menuProfessor() {
+        do {
+            System.out.println("╔═════════════════════════════════════════╗");
+            System.out.println("║                MENU                     ║");
+            System.out.println("╠═════════════════════════════════════════╣");
+            System.out.println("║  1 - Atribuir notas aos estudantes      ║");
+            System.out.println("║     2 - Mostrar a estatística           ║");
+            System.out.println("║      3 - Lista de recuperação           ║");
+            System.out.println("║           4 - Histórico                 ║");
+            System.out.println("║             0 - Sair                    ║");
+            System.out.println("╚═════════════════════════════════════════╝");
+            System.out.print("Opção: ");
+            opcao = entrada.nextInt();
+
+            switch (opcao) {
+
+                case 1:
+                    cadastrarNotas();
+                    break;
+                case 2:
+                    mostrarEstatistica();
+                    break;
+                case 3:
+                    exibirListaRecuperacao();
+                    break;
+                case 4:
+                    exibirHistorico();
+                    break;
+                case 0:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        } while (opcao != 0);
+
     }
 
-    db.getCursos().get(escolhaCurso).vincularCoordenador( db.getProfessores().get(escolhaProfessor));
-    System.out.println(db.getProfessores().get(escolhaProfessor).getNome() + " agora é o coordenador.");
-}
+    public static void cadastarCoordenador() {
 
+        System.out.println("Lista de professores:");
+        for (int i = 0; i < db.getProfessores().size(); i++) {
+            System.out.printf("%d - %s\n", i + 1, db.getProfessores().get(i).getNome());
+        }
 
-public static void cadastrarNotas(){
-   System.out.println(" ---- Cadastrar Notas ----");
-   
-   System.out.println("Selecione a turma");
-    
-    for (int i = 0, totalTurmas = db.getTurmas().size(); i < totalTurmas; i++) {
-      System.out.println(i + " - " +db.getTurmas().get(i).getIdentificacao() + " Curso "+ db.getTurmas().get(i).getCurso().getNomeCurso());
-    } 
-   
-    int escolhaTurma = entrada.nextInt();
+        System.out.print("Escolha o professor coordenador: ");
+        int escolhaProfessor = entrada.nextInt();
 
-    if (escolhaTurma < 0 || escolhaTurma > db.getTurmas().size()-1) {
-        System.out.println("Escolha inválida.");
-        return;
+        if (escolhaProfessor < 0 || escolhaProfessor > db.getProfessores().size() - 1) {
+            System.out.println("Escolha inválida.");
+            return;
+        }
+
+        System.out.print("Escolha o curso para vinculá-lo como coordenador: ");
+        for (int i = 0; i < db.getCursos().size(); i++) {
+            System.out.printf("%d - %s\n", i + 1, db.getCursos().get(i).getNomeCurso());
+        }
+        int escolhaCurso = entrada.nextInt();
+
+        if (escolhaCurso < 0 || escolhaCurso > db.getCursos().size() - 1) {
+            System.out.println("Escolha inválida.");
+            return;
+        }
+
+        db.getCursos().get(escolhaCurso).vincularCoordenador(db.getProfessores().get(escolhaProfessor));
+        System.out.println(db.getProfessores().get(escolhaProfessor).getNome() + " agora é o coordenador.");
     }
 
+    public static void cadastrarNotas() {
+        System.out.println(" ---- Cadastrar Notas ----");
 
-    System.out.println("Turma "+db.getTurmas().get(escolhaTurma).getIdentificacao()+" selecionada, selecione o estudante");
+        System.out.println("Selecione a turma");
 
-    for (int i = 0, totalAlunos = db.getTurmas().get(escolhaTurma).getAlunosTurma().size(); i < totalAlunos; i++) {
-      System.out.println(i + " - " +db.getTurmas().get(escolhaTurma).getAlunosTurma().get(i).getAluno().getNome());
-    } 
-    
-    int escolhaEstudante = entrada.nextInt();
+        for (int i = 0, totalTurmas = db.getTurmas().size(); i < totalTurmas; i++) {
+            System.out.println(i + " - " + db.getTurmas().get(i).getIdentificacao() + " Curso " + db.getTurmas().get(i).getCurso().getNomeCurso());
+        }
 
-    if (escolhaEstudante < 0 || escolhaEstudante > db.getTurmas().get(escolhaTurma).getAlunosTurma().size()-1) {
-        System.out.println("Escolha inválida.");
-        return;
+        int escolhaTurma = entrada.nextInt();
+
+        if (escolhaTurma < 0 || escolhaTurma > db.getTurmas().size() - 1) {
+            System.out.println("Escolha inválida.");
+            return;
+        }
+
+        System.out.println("Turma " + db.getTurmas().get(escolhaTurma).getIdentificacao() + " selecionada, selecione o estudante");
+
+        for (int i = 0, totalAlunos = db.getTurmas().get(escolhaTurma).getAlunosTurma().size(); i < totalAlunos; i++) {
+            System.out.println(i + " - " + db.getTurmas().get(escolhaTurma).getAlunosTurma().get(i).getAluno().getNome());
+        }
+
+        int escolhaEstudante = entrada.nextInt();
+
+        if (escolhaEstudante < 0 || escolhaEstudante > db.getTurmas().get(escolhaTurma).getAlunosTurma().size() - 1) {
+            System.out.println("Escolha inválida.");
+            return;
+        }
+
+        Aluno aluno = db.getTurmas().get(escolhaTurma).getAlunosTurma().get(escolhaEstudante).getAluno();
+        Nota nota = db.getTurmas().get(escolhaTurma).getAlunosTurma().get(escolhaEstudante).getNota();
+
+        System.out.printf("Notas do aluno(a): %s\n", aluno.getNome());
+
+        System.out.print("Informe a nota 1: ");
+        nota.setNota1(entrada.nextDouble());
+
+        System.out.print("Informe a nota 2: ");
+        nota.setNota2(entrada.nextDouble());
+
+        System.out.print("Informe a nota 3: ");
+        nota.setNota3(entrada.nextDouble());
+
+        System.out.printf("Média: %.2f\n", nota.calcularMedia());
+        System.out.print("Situação: ");
+        db.getTurmas().get(escolhaTurma).getAlunosTurma().get(escolhaEstudante).setNota(nota);
+        nota.verificarSituacao();
+
     }
 
-    Aluno aluno = db.getTurmas().get(escolhaTurma).getAlunosTurma().get(escolhaEstudante).getAluno();
-    Nota nota = db.getTurmas().get(escolhaTurma).getAlunosTurma().get(escolhaEstudante).getNota();
-
-    System.out.printf("Notas do aluno(a): %s\n", aluno.getNome());
-   
-    System.out.print("Informe a nota 1: ");
-    nota.setNota1(entrada.nextDouble());
-
-    System.out.print("Informe a nota 2: ");
-    nota.setNota2(entrada.nextDouble());
-
-    System.out.print("Informe a nota 3: ");
-    nota.setNota3(entrada.nextDouble());
-
-    System.out.printf("Média: %.2f\n", nota.calcularMedia());
-    System.out.print("Situação: ");
-    db.getTurmas().get(escolhaTurma).getAlunosTurma().get(escolhaEstudante).setNota(nota);
-    nota.verificarSituacao();
-
-}
-
-
-public static void mostrarEstatistica(){
-    System.out.println("Estatisticas");
-    for( int i = 0; i < db.getTurmas().size(); i++){
-      System.out.println("Dados da turma " + db.getTurmas().get(i).getIdentificacao());
-      db.getTurmas().get(i).setEstatica();
-      System.out.println();
+    public static void mostrarEstatistica() {
+        System.out.println("Estatisticas");
+        for (int i = 0; i < db.getTurmas().size(); i++) {
+            System.out.println("Dados da turma " + db.getTurmas().get(i).getIdentificacao());
+            db.getTurmas().get(i).setEstatica();
+            System.out.println();
+        }
     }
-}
 
+    public static void exibirListaRecuperacao() {
+        System.out.println("Lista de recuperação");
+        System.out.println("Escolha a turma para listar alunos em recuperação:");
+        for (int i = 0; i < db.getTurmas().size(); i++) {
+            System.out.println(i + " - Turma: " + db.getTurmas().get(i).getIdentificacao());
+        }
+        int turmaEscolhida = entrada.nextInt();
+        if (turmaEscolhida < 0 || turmaEscolhida > db.getTurmas().size() - 1) {
+            System.out.println("Turma inválida!");
+            return;
+        }
+        Turma turma = db.getTurmas().get(turmaEscolhida);
+        int qtdAluno = 0;
+        for (AlunoTurma aluno : turma.getAlunosTurma()) {
+            if (aluno.getNota().calcularMedia() >= 2.5 && aluno.getNota().calcularMedia() < 7) {
+                System.out.print("Insira uma nota de recuperação para " + aluno.getAluno().getNome() + ": ");
+                double novaNota = entrada.nextDouble();
+                aluno.getNota().setNotaRecuperacao(novaNota);
+                System.out.println("Nota de recuperação registrada.");
+                qtdAluno++;
+            }
+        }
 
-public static void exibirListaRecuperacao(){
-  System.out.println("Lista de recuperação");
-          System.out.println("Escolha a turma para listar alunos em recuperação:");
-          for (int i = 0; i < db.getTurmas().size(); i++) {
-              System.out.println(i + " - Turma: " + db.getTurmas().get(i).getIdentificacao());
-          }
-          int turmaEscolhida = entrada.nextInt();
-          if (turmaEscolhida < 0 || turmaEscolhida > db.getTurmas().size()-1) {
-              System.out.println("Turma inválida!");
-              return;
-          }
-          Turma turma = db.getTurmas().get(turmaEscolhida);
-          int qtdAluno = 0;
-          for (AlunoTurma aluno : turma.getAlunosTurma()) {
-               if (aluno.getNota().calcularMedia() >= 2.5 && aluno.getNota().calcularMedia() < 7) {
-                  System.out.print("Insira uma nota de recuperação para " + aluno.getAluno().getNome() + ": ");
-                  double novaNota = entrada.nextDouble();
-                  aluno.getNota().setNotaRecuperacao(novaNota);
-                  System.out.println("Nota de recuperação registrada.");
-                  qtdAluno++;
-                }
-          }
-
-          if(qtdAluno == 0){
+        if (qtdAluno == 0) {
             System.out.println("Nenhum aluno atende ao critério de recuperação.");
-          }
-}
-
-
-public static void exibirListaGeral(){
-  DataBase db = DataBase.getInstance();
-  db.getTurmas().get(0).exibirDados();
-  System.out.println();
-
-  System.out.println("Cursos:");
-  for (Curso curso : db.getCursos()) {
-    System.out.println("Nome do curso: " + curso.getNomeCurso() + ", Semestres: " + curso.getQtdSemestre());
-  }
-
-  db.getTurmas().get(1).exibirDados();
-  System.out.println("Cursos:");
-  for (Curso curso : db.getCursos()) {
-    System.out.println("Nome do curso: " + curso.getNomeCurso() + ", Semestres: " + curso.getQtdSemestre());
-  }
-}
-
-public static void exibirHistorico(){
-  
-DataBase db = DataBase.getInstance();
-  
-    System.out.println("Histórico de alterações dos alunos:");
-    for (Aluno aluno : db.getAlunos()) {
-        aluno.exibirHistorico();
-        System.out.println();
+        }
     }
-}
 
+    public static void exibirListaGeral() {
+        DataBase db = DataBase.getInstance();
+        db.getTurmas().get(0).exibirDados();
+        System.out.println();
 
-public static void cadastrarProfessor(){
-   DataBase db = DataBase.getInstance();
-  //ADICIONE EM TODOS OS MÉTODOS QUE USAM db
- //DataBase db = DataBase.getInstace();
+        System.out.println("Cursos:");
+        for (Curso curso : db.getCursos()) {
+            System.out.println("Nome do curso: " + curso.getNomeCurso() + ", Semestres: " + curso.getQtdSemestre());
+        }
 
-  System.out.println(" ---- Cadastrar Professor ----");
-  Professor professor = new Professor();
-  entrada.nextLine();
-  System.out.print("Informe o nome: ");
-  professor.setNome(entrada.nextLine());
+        db.getTurmas().get(1).exibirDados();
+        System.out.println("Cursos:");
+        for (Curso curso : db.getCursos()) {
+            System.out.println("Nome do curso: " + curso.getNomeCurso() + ", Semestres: " + curso.getQtdSemestre());
+        }
+    }
 
-  System.out.print("Informe o CPF: ");
-  professor.setCpf(entrada.nextLine());
+    public static void exibirHistorico() {
 
-  System.out.print("Informe o telefone: ");
-  professor.setTelefone(entrada.nextLine());
+        DataBase db = DataBase.getInstance();
 
-  System.out.print("Informe o endereço: ");
-  professor.setEndereco(entrada.nextLine());
+        System.out.println("Histórico de alterações dos alunos:");
+        for (Aluno aluno : db.getAlunos()) {
+            aluno.exibirHistorico();
+            System.out.println();
+        }
+    }
 
-  System.out.print("Informe o SIAPE: ");
-  professor.setSiape(entrada.nextLine());
+    public static void cadastrarProfessor() {
+        DataBase db = DataBase.getInstance();
+        //ADICIONE EM TODOS OS MÉTODOS QUE USAM db
+        //DataBase db = DataBase.getInstace();
 
-  db.getProfessores().add(professor);
-  System.out.println("Professor cadastrado com sucesso!");
+        System.out.println(" ---- Cadastrar Professor ----");
+        Professor professor = new Professor();
+        entrada.nextLine();
+        System.out.print("Informe o nome: ");
+        professor.setNome(entrada.nextLine());
 
-}
+        System.out.print("Informe o CPF: ");
+        professor.setCpf(entrada.nextLine());
 
-public static void vincularProfessorTurma(){
+        System.out.print("Informe o telefone: ");
+        professor.setTelefone(entrada.nextLine());
 
-    DataBase db = DataBase.getInstance();
+        System.out.print("Informe o endereço: ");
+        professor.setEndereco(entrada.nextLine());
 
-  System.out.println(" ---- Vincular Professor a Turma ----");
-  System.out.println("Escolha o professor para vincular:");
-  for (int i = 0; i < db.getProfessores().size(); i++) {
-      System.out.println(i + " - Prof.: " + db.getProfessores().get(i).getNome() + "(SIAPE: "+ db.getProfessores().get(i).getSiape()+")" );
-  }
-  int profEscolhido = entrada.nextInt();
-  if (profEscolhido < 0 || profEscolhido > db.getProfessores().size()-1) {
-      System.out.println("Professor inválida!");
-      return;
-  }
+        System.out.print("Informe o SIAPE: ");
+        professor.setSiape(entrada.nextLine());
 
-  System.out.println("Escolha a truma para vincular o professor");
-  for (int i = 0; i < db.getTurmas().size(); i++) {
-      System.out.println(i + " - Turma: " + db.getTurmas().get(i).getIdentificacao());
-  }
-  int turmaEscolhida = entrada.nextInt();
-  if (turmaEscolhida < 0 || turmaEscolhida > db.getTurmas().size()-1) {
-      System.out.println("Turma inválida!");
-      return;
-  }
+        db.getProfessores().add(professor);
+        System.out.println("Professor cadastrado com sucesso!");
 
-  System.out.println("Vincular Professor "+ db.getProfessores().get(profEscolhido).getNome()+ " a Turma " + db.getTurmas().get(turmaEscolhida).getIdentificacao() );
-  System.out.println("1 - Sim \n2 - Não");
-  int opcEscolhida = entrada.nextInt();
-  if(opcEscolhida == 1){
-    System.out.println("Professor Vinculado com Sucesso");
-    db.getTurmas().get(turmaEscolhida).adicionarProfessor( db.getProfessores().get(profEscolhido));
-  }else if(opcEscolhida == 2){
-    System.out.println("Operação Cancelada");
-  }else{
-    System.out.println("Opção Inválida - Operação Cancelada");
-  }
+    }
 
-}
+    public static void vincularProfessorTurma() {
 
+        DataBase db = DataBase.getInstance();
 
-public static void cadastrarCurso() {
+        System.out.println(" ---- Vincular Professor a Turma ----");
+        System.out.println("Escolha o professor para vincular:");
+        for (int i = 0; i < db.getProfessores().size(); i++) {
+            System.out.println(i + " - Prof.: " + db.getProfessores().get(i).getNome() + "(SIAPE: " + db.getProfessores().get(i).getSiape() + ")");
+        }
+        int profEscolhido = entrada.nextInt();
+        if (profEscolhido < 0 || profEscolhido > db.getProfessores().size() - 1) {
+            System.out.println("Professor inválida!");
+            return;
+        }
 
-  System.out.println(" ---- Cadastrar Curso ----");
-  Curso curso = new Curso();
+        System.out.println("Escolha a truma para vincular o professor");
+        for (int i = 0; i < db.getTurmas().size(); i++) {
+            System.out.println(i + " - Turma: " + db.getTurmas().get(i).getIdentificacao());
+        }
+        int turmaEscolhida = entrada.nextInt();
+        if (turmaEscolhida < 0 || turmaEscolhida > db.getTurmas().size() - 1) {
+            System.out.println("Turma inválida!");
+            return;
+        }
 
-  System.out.print("Informe o nome do curso: ");
-  curso.setNomeCurso(entrada.nextLine());
+        System.out.println("Vincular Professor " + db.getProfessores().get(profEscolhido).getNome() + " a Turma " + db.getTurmas().get(turmaEscolhida).getIdentificacao());
+        System.out.println("1 - Sim \n2 - Não");
+        int opcEscolhida = entrada.nextInt();
+        if (opcEscolhida == 1) {
+            System.out.println("Professor Vinculado com Sucesso");
+            db.getTurmas().get(turmaEscolhida).adicionarProfessor(db.getProfessores().get(profEscolhido));
+        } else if (opcEscolhida == 2) {
+            System.out.println("Operação Cancelada");
+        } else {
+            System.out.println("Opção Inválida - Operação Cancelada");
+        }
 
-  System.out.print("Informe a quantidade de semestres: ");
-  curso.setQtdSemestre(entrada.nextLine());
+    }
 
-  System.out.println("Curso cadastrado com sucesso!");
-}
+    public static void cadastrarCurso() {
 
-public static void cadastrarAluno() {
+        System.out.println(" ---- Cadastrar Curso ----");
+        Curso curso = new Curso();
 
-    DataBase db = DataBase.getInstance();
+        System.out.print("Informe o nome do curso: ");
+        curso.setNomeCurso(entrada.nextLine());
 
-  System.out.println(" ---- Cadastrar Aluno ----");
-  Aluno aluno = new Aluno();
-  entrada.nextLine();
-  System.out.print("Informe o nome: ");
-  aluno.setNome(entrada.nextLine());
+        System.out.print("Informe a quantidade de semestres: ");
+        curso.setQtdSemestre(entrada.nextLine());
 
-  System.out.print("Informe o CPF: ");
-  aluno.setCpf(entrada.nextLine());
+        System.out.println("Curso cadastrado com sucesso!");
+    }
 
-  System.out.print("Informe o telefone: ");
-  aluno.setTelefone(entrada.nextLine());
+    public static void cadastrarAluno() {
 
-  System.out.print("Informe o endereço: ");
-  aluno.setEndereco(entrada.nextLine());
+        DataBase db = DataBase.getInstance();
 
-  System.out.print("Informe a matrícula: ");
-  aluno.setMatricula(entrada.nextLine());
-  
-  db.getAlunos().add(aluno);
-  System.out.println("Aluno cadastrado com sucesso!");
+        System.out.println(" ---- Cadastrar Aluno ----");
+        Aluno aluno = new Aluno();
+        entrada.nextLine();
+        System.out.print("Informe o nome: ");
+        aluno.setNome(entrada.nextLine());
 
-}
+        System.out.print("Informe o CPF: ");
+        aluno.setCpf(entrada.nextLine());
 
-public static void vincularEstudanteTurma(){
+        System.out.print("Informe o telefone: ");
+        aluno.setTelefone(entrada.nextLine());
 
-  System.out.println(" ---- Vincular Estudante a Turma ----");
-  System.out.println("Escolha o estudante para vincular:");
-  for (int i = 0; i < db.getAlunos().size(); i++) {
-      System.out.println(i + " - Prof.: " + db.getAlunos().get(i).getNome() );
-  }
-  int alunoEscolhido = entrada.nextInt();
-  if (alunoEscolhido < 0 || alunoEscolhido > db.getAlunos().size()-1) {
-      System.out.println("Professor inválida!");
-      return;
-  }
+        System.out.print("Informe o endereço: ");
+        aluno.setEndereco(entrada.nextLine());
 
-  System.out.println("Escolha a truma para vincular o professor");
-  for (int i = 0; i < db.getTurmas().size(); i++) {
-      System.out.println(i + " - Turma: " + db.getTurmas().get(i).getIdentificacao());
-  }
-  int turmaEscolhida = entrada.nextInt();
-  if (turmaEscolhida < 0 || turmaEscolhida > db.getTurmas().size()-1) {
-      System.out.println("Turma inválida!");
-      return;
-  }
+        System.out.print("Informe a matrícula: ");
+        aluno.setMatricula(entrada.nextLine());
 
-  System.out.println("Vincular Estudante "+ db.getAlunos().get(alunoEscolhido).getNome()+ " a Turma " + db.getTurmas().get(turmaEscolhida).getIdentificacao() +"?" );
-  System.out.println("1 - Sim \n2 - Não");
-  int opcEscolhida = entrada.nextInt();
-  if(opcEscolhida == 1){
-    System.out.println("Professor Vinculado com Sucesso");
-    db.getTurmas().get(turmaEscolhida).adicionarAluno( new AlunoTurma( db.getAlunos().get(alunoEscolhido)));
-  }else if(opcEscolhida == 2){
-    System.out.println("Operação Cancelada");
-  }else{
-    System.out.println("Opção Inválida - Operação Cancelada");
-  }
-}
+        db.getAlunos().add(aluno);
+        System.out.println("Aluno cadastrado com sucesso!");
 
-public static void cadastrarTurma(){ 
+    }
 
-  DataBase db = DataBase.getInstance();
-  
-  System.out.println(" ---- Cadastrar Turma ----");
-  Turma turma = new Turma();
+    public static void vincularEstudanteTurma() {
 
-  System.out.print("Informe identificação: ");
-  turma.setIdentificacao(entrada.nextLine());
+        System.out.println(" ---- Vincular Estudante a Turma ----");
+        System.out.println("Escolha o estudante para vincular:");
+        for (int i = 0; i < db.getAlunos().size(); i++) {
+            System.out.println(i + " - Prof.: " + db.getAlunos().get(i).getNome());
+        }
+        int alunoEscolhido = entrada.nextInt();
+        if (alunoEscolhido < 0 || alunoEscolhido > db.getAlunos().size() - 1) {
+            System.out.println("Professor inválida!");
+            return;
+        }
 
-  System.out.print("Informe o semestre: ");
-  turma.setSemestre(entrada.nextLine());
+        System.out.println("Escolha a truma para vincular o professor");
+        for (int i = 0; i < db.getTurmas().size(); i++) {
+            System.out.println(i + " - Turma: " + db.getTurmas().get(i).getIdentificacao());
+        }
+        int turmaEscolhida = entrada.nextInt();
+        if (turmaEscolhida < 0 || turmaEscolhida > db.getTurmas().size() - 1) {
+            System.out.println("Turma inválida!");
+            return;
+        }
 
-  System.out.print("Escolha o curso para vinculá-lo como coordenador: ");
-  for (int i = 0; i < db.getCursos().size(); i++) {
-    System.out.printf("%d - %s\n", i + 1, db.getCursos().get(i).getNomeCurso());
-  }
-  int escolhaCurso = entrada.nextInt();
+        System.out.println("Vincular Estudante " + db.getAlunos().get(alunoEscolhido).getNome() + " a Turma " + db.getTurmas().get(turmaEscolhida).getIdentificacao() + "?");
+        System.out.println("1 - Sim \n2 - Não");
+        int opcEscolhida = entrada.nextInt();
+        if (opcEscolhida == 1) {
+            System.out.println("Professor Vinculado com Sucesso");
+            db.getTurmas().get(turmaEscolhida).adicionarAluno(new AlunoTurma(db.getAlunos().get(alunoEscolhido)));
+        } else if (opcEscolhida == 2) {
+            System.out.println("Operação Cancelada");
+        } else {
+            System.out.println("Opção Inválida - Operação Cancelada");
+        }
+    }
 
-  if (escolhaCurso < 0 || escolhaCurso > db.getCursos().size()-1) {
-      System.out.println("Escolha inválida.");
-      return;
-  }
+    public static void cadastrarTurma() {
 
-  turma.setCurso( db.getCursos().get(escolhaCurso));
+        DataBase db = DataBase.getInstance();
 
-  System.out.println("Turma cadastrada com sucesso!");
-}
+        System.out.println(" ---- Cadastrar Turma ----");
+        Turma turma = new Turma();
 
-  public static String exportarDadosEstudante(){
-  DataBase db = DataBase.getInstance();
-  ArrayList<String[]> data = new ArrayList<String[]>();
- 
-  ExportData exp = new ExportData();
-  ArrayList<Aluno> alunos = db.getAlunos();
-  for(int i = 0; i < alunos.size(); i++){
-    String[] sm = {"matricula", alunos.get(i).getMatricula()};
-    String[] sn = {"nome", alunos.get(i).getNome()};
-    String[] sc ={"cpf", alunos.get(i).getCpf()};
-    String[] st = {"telefone", alunos.get(i).getTelefone()};
-    String[] se =  {"endereco",alunos.get(i).getEndereco()};
-    data.add(sm);
-    data.add(sn);
-    data.add(sc);
-    data.add(st);
-    data.add(se);
+        System.out.print("Informe identificação: ");
+        turma.setIdentificacao(entrada.nextLine());
 
+        System.out.print("Informe o semestre: ");
+        turma.setSemestre(entrada.nextLine());
 
-  }
-    
-  return exp.ArrayToXMLFormat(data, 5 , "student");
+        System.out.print("Escolha o curso para vinculá-lo como coordenador: ");
+        for (int i = 0; i < db.getCursos().size(); i++) {
+            System.out.printf("%d - %s\n", i + 1, db.getCursos().get(i).getNomeCurso());
+        }
+        int escolhaCurso = entrada.nextInt();
+
+        if (escolhaCurso < 0 || escolhaCurso > db.getCursos().size() - 1) {
+            System.out.println("Escolha inválida.");
+            return;
+        }
+
+        turma.setCurso(db.getCursos().get(escolhaCurso));
+
+        System.out.println("Turma cadastrada com sucesso!");
+    }
+
+    public static String exportarDadosEstudante() {
+        DataBase db = DataBase.getInstance();
+        ArrayList<String[]> data = new ArrayList<String[]>();
+
+        ExportData exp = new ExportData();
+        ArrayList<Aluno> alunos = db.getAlunos();
+        for (int i = 0; i < alunos.size(); i++) {
+            String[] sm = {"matricula", alunos.get(i).getMatricula()};
+            String[] sn = {"nome", alunos.get(i).getNome()};
+            String[] sc = {"cpf", alunos.get(i).getCpf()};
+            String[] st = {"telefone", alunos.get(i).getTelefone()};
+            String[] se = {"endereco", alunos.get(i).getEndereco()};
+            data.add(sm);
+            data.add(sn);
+            data.add(sc);
+            data.add(st);
+            data.add(se);
+
+        }
+
+        return exp.ArrayToXMLFormat(data, 5, "student");
+
+    }
 
 }

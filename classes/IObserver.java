@@ -1,8 +1,6 @@
 package classes;
 
-public interface iObserver {
+public interface IObserver {
 
-    
-    public  void update(Boolean param); 
-        
+    void update(Object data);
 }
