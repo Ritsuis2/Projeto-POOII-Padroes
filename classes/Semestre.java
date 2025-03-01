@@ -48,4 +48,5 @@ public class Semestre {
             observadores.get(i).update(ativo);
         }
     }
+
 }

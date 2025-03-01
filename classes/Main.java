@@ -285,8 +285,6 @@ public class Main {
 
     public static void cadastrarProfessor() {
         DataBase db = DataBase.getInstance();
-        //ADICIONE EM TODOS OS MÉTODOS QUE USAM db
-        //DataBase db = DataBase.getInstace();
 
         System.out.println(" ---- Cadastrar Professor ----");
         Professor professor = new Professor();
@@ -438,7 +436,8 @@ public class Main {
         turma.setIdentificacao(entrada.nextLine());
 
         System.out.print("Informe o semestre: ");
-        turma.setSemestre(entrada.nextLine());
+        Semestre semestre1 = new Semestre(entrada.nextLine(), true);
+        turma.setSemestre(semestre1);
 
         System.out.print("Escolha o curso para vinculá-lo como coordenador: ");
         for (int i = 0; i < db.getCursos().size(); i++) {
