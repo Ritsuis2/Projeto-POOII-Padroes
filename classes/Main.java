@@ -14,6 +14,10 @@ public class Main {
   //static Nota nota;
 
   public static void main(String[] args) {
+
+    ImportDataMEC importador = new ImportDataMEC();
+    db.addObserver(importador);
+    
     selecionarMenu();
     entrada.close();
   }
@@ -260,6 +264,7 @@ public static void exibirListaRecuperacao(){
 
 
 public static void exibirListaGeral(){
+  DataBase db = DataBase.getInstance();
   db.getTurmas().get(0).exibirDados();
   System.out.println();
 
@@ -276,7 +281,9 @@ public static void exibirListaGeral(){
 }
 
 public static void exibirHistorico(){
-
+  
+DataBase db = DataBase.getInstance();
+  
     System.out.println("Histórico de alterações dos alunos:");
     for (Aluno aluno : db.getAlunos()) {
         aluno.exibirHistorico();
@@ -286,6 +293,7 @@ public static void exibirHistorico(){
 
 
 public static void cadastrarProfessor(){
+   DataBase db = DataBase.getInstance();
   //ADICIONE EM TODOS OS MÉTODOS QUE USAM db
  //DataBase db = DataBase.getInstace();
 
@@ -313,6 +321,8 @@ public static void cadastrarProfessor(){
 }
 
 public static void vincularProfessorTurma(){
+
+    DataBase db = DataBase.getInstance();
 
   System.out.println(" ---- Vincular Professor a Turma ----");
   System.out.println("Escolha o professor para vincular:");
@@ -365,6 +375,8 @@ public static void cadastrarCurso() {
 }
 
 public static void cadastrarAluno() {
+
+    DataBase db = DataBase.getInstance();
 
   System.out.println(" ---- Cadastrar Aluno ----");
   Aluno aluno = new Aluno();
@@ -426,6 +438,9 @@ public static void vincularEstudanteTurma(){
 }
 
 public static void cadastrarTurma(){ 
+
+  DataBase db = DataBase.getInstance();
+  
   System.out.println(" ---- Cadastrar Turma ----");
   Turma turma = new Turma();
 
@@ -450,5 +465,28 @@ public static void cadastrarTurma(){
 
   System.out.println("Turma cadastrada com sucesso!");
 }
+
+  public static String exportarDadosEstudante(){
+  DataBase db = DataBase.getInstance();
+  ArrayList<String[]> data = new ArrayList<String[]>();
+ 
+  ExportData exp = new ExportData();
+  ArrayList<Aluno> alunos = db.getAlunos();
+  for(int i = 0; i < alunos.size(); i++){
+    String[] sm = {"matricula", alunos.get(i).getMatricula()};
+    String[] sn = {"nome", alunos.get(i).getNome()};
+    String[] sc ={"cpf", alunos.get(i).getCpf()};
+    String[] st = {"telefone", alunos.get(i).getTelefone()};
+    String[] se =  {"endereco",alunos.get(i).getEndereco()};
+    data.add(sm);
+    data.add(sn);
+    data.add(sc);
+    data.add(st);
+    data.add(se);
+
+
+  }
+    
+  return exp.ArrayToXMLFormat(data, 5 , "student");
 
 }
