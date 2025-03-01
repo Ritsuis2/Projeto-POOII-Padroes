@@ -1,5 +1,7 @@
 package classes;
 
+public class Nota implements iObserver {
+  
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +10,7 @@ private Double nota1;
 private Double nota2;
 private Double nota3;
 private Double notaRecuperacao;
-private boolean bloqueado = false;
-private List<ElementList> observers = new ArrayList<>();
+private boolean bloqueado;
   
   public Nota(){
    this.nota1 = 0.0;
@@ -20,9 +21,12 @@ private List<ElementList> observers = new ArrayList<>();
 
 
   public Nota(Double nota1, Double nota2, Double nota3) {
+
+    if (!bloqueado){
     this.nota1 = (nota1 != null) ? nota1 : 0.0;
     this.nota2 = (nota2 != null) ? nota2 : 0.0;
     this.nota3 = (nota3 != null) ? nota3 : 0.0; 
+   }
 }
 
 
@@ -31,8 +35,10 @@ public Double getNota1() {
 }
 
 public void setNota1(Double nota1) {
+   if (!bloqueado){
   this.nota1 = nota1;
   notifyObservers();
+  }
 }
 
 
@@ -42,8 +48,10 @@ public Double getNota2() {
 }
 
 public void setNota2(Double nota2) {
+  if (!bloqueado){
   this.nota2 = nota2;
   notifyObservers();
+    }
 }
 
 
@@ -52,8 +60,10 @@ public Double getNota3() {
 }
 
 public void setNota3(Double nota3) {
+   if (!bloqueado){
   this.nota3 = nota3;
   notifyObservers();
+  }
 }
 
 
@@ -93,17 +103,7 @@ public String toString(){
   return this.nota1 + " , " + this.nota2 + " " + this.nota3;
 }
 
-  public void addObserver(ElementList observer) {
-        this.observers.add(observer);
-    }
-
-  public void removeObserver(ElementList observer) {
-        this.observers.remove(observer);
-    }
-
-  private void notifyObservers() {
-        for (ElementList observer : observers) {
-            observer.update(this, this.bloqueado); 
-       }
-    }
+public  void update(Boolean param){
+  bloqueado = !param;
+}
 }
