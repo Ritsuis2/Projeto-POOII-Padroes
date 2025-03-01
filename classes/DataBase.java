@@ -9,7 +9,7 @@ public class DataBase implements IObservable {
     private ArrayList<Professor> professores;
     private ArrayList<Curso> cursos;
     private ArrayList<Turma> turmas;
-    private ArrayList<IObserver> observers; // Lista de observadores
+    private ArrayList<IObserver> observers;
 
     private DataBase() {
         this.alunos = new ArrayList<>();
@@ -26,17 +26,14 @@ public class DataBase implements IObservable {
         return instance;
     }
 
-    @Override
     public void addObserver(IObserver observer) {
         observers.add(observer);
     }
 
-    @Override
     public void removeObserver(IObserver observer) {
         observers.remove(observer);
     }
 
-    @Override
     public void notifyObservers(Object arg) {
         for (IObserver observer : observers) {
             observer.update(arg);
@@ -78,4 +75,17 @@ public class DataBase implements IObservable {
         this.turmas = turmas;
         notifyObservers(true);
     }
+
+    public void exportarDadosEstudante() {
+        System.out.println("Exportando dados dos estudantes...");
+        for (Aluno aluno : alunos) {
+            System.out.println("Nome: " + aluno.getNome());
+            System.out.println("Matrícula: " + aluno.getMatricula());
+            System.out.println("CPF: " + aluno.getCpf());
+            System.out.println("Telefone: " + aluno.getTelefone());
+            System.out.println("Endereço: " + aluno.getEndereco());
+            System.out.println("-------------------------------------");
+        }
+    }
+
 }
