@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 public class Main {
 
-    // Apliquei o Singleton aqui, removendo a declaração direta de db, utilizando o método getInstance
     static DataBase db = DataBase.getInstance();
     static int opcao;
     static Scanner entrada = new Scanner(System.in);
@@ -268,22 +267,32 @@ public class Main {
 
         Aluno aluno = db.getTurmas().get(escolhaTurma).getAlunosTurma().get(escolhaEstudante).getAluno();
         Nota nota = db.getTurmas().get(escolhaTurma).getAlunosTurma().get(escolhaEstudante).getNota();
-
+        
         System.out.printf("Notas do aluno(a): %s\n", aluno.getNome());
-
+        
         System.out.print("Informe a nota 1: ");
         nota.setNota1(entrada.nextDouble());
-
+        
         System.out.print("Informe a nota 2: ");
         nota.setNota2(entrada.nextDouble());
 
         System.out.print("Informe a nota 3: ");
         nota.setNota3(entrada.nextDouble());
 
+        System.out.printf("Nota 1: %.2f\n", nota.getNota1());  
+        System.out.printf("Nota 2: %.2f\n", nota.getNota2());  
+        System.out.printf("Nota 3: %.2f\n", nota.getNota3()); 
+
         System.out.printf("Média: %.2f\n", nota.calcularMedia());
-        System.out.print("Situação: ");
-        db.getTurmas().get(escolhaTurma).getAlunosTurma().get(escolhaEstudante).setNota(nota);
-        nota.verificarSituacao();
+        if (nota.calcularMedia() >= 7.0) {
+            aluno.setEstado(new EstadoAtivo());  
+        } else if (nota.calcularMedia() >= 5.0) {
+            aluno.setEstado(new EstadoRecuperacao()); 
+        } else {
+            aluno.setEstado(new EstadoReprovado()); 
+        }
+
+        aluno.getEstado().setNota(db.getTurmas().get(escolhaTurma), nota.getNota1()); 
     }
 
     public static void mostrarEstatistica() {
