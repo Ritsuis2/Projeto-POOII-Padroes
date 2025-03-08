@@ -2,8 +2,8 @@ package classes;
 
 public class EstadoAtivo implements EstadoAlunoTurma {
     
-    public void addNota(AlunoTurma alunoTurma, double valor) {
-        alunoTurma.getNota().adicionarNota(valor);
+    public void setNota(AlunoTurma alunoTurma, double nota) {
+        alunoTurma.getNota().adicionarNota(nota);
         System.out.println("Nota adicionada normalmente.");
     }
 }
