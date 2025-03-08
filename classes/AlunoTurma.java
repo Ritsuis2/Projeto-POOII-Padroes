@@ -3,7 +3,7 @@ package classes;
 public class AlunoTurma {
     private Aluno aluno;
     private Nota nota;
-    private EstadoAlunoTurma estado;
+    private IEstadoAlunoTurma estado;
 
     public AlunoTurma(){}
     
