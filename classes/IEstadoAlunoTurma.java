@@ -1,5 +1,5 @@
 package classes;
 
 public interface EstadoAlunoTurma {
-    void addNota(AlunoTurma alunoTurma, double valor);
+    void setNota(AlunoTurma alunoTurma, double nota);
 }
