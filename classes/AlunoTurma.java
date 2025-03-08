@@ -3,17 +3,19 @@ package classes;
 public class AlunoTurma {
     private Aluno aluno;
     private Nota nota;
+    private EstadoAlunoTurma estado;
 
     public AlunoTurma(){}
     
     public AlunoTurma(Aluno aluno){
         this.aluno = aluno;
         this.nota = new Nota();
-    }
+        this.estado = new EstadoAtivo();
 
-    public AlunoTurma(Aluno aluno, Nota nota){
-        this.aluno = aluno;
-        this.nota =nota;
+    }
+    
+     public void setEstado(EstadoAlunoTurma estado) {
+        this.estado = estado;
     }
 
     public Nota getNota(){
