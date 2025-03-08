@@ -285,14 +285,14 @@ public class Main {
 
         System.out.printf("Média: %.2f\n", nota.calcularMedia());
         if (nota.calcularMedia() >= 7.0) {
-            aluno.setEstado(new EstadoAtivo());  
+            alunoTurma.setEstado(new EstadoAtivo());  
         } else if (nota.calcularMedia() >= 5.0) {
-            aluno.setEstado(new EstadoRecuperacao()); 
+            alunoTurma.setEstado(new EstadoRecuperacao()); 
         } else {
-            aluno.setEstado(new EstadoReprovado()); 
+            alunoTurma.setEstado(new EstadoReprovado()); 
         }
 
-        aluno.getEstado().setNota(db.getTurmas().get(escolhaTurma), nota.getNota1()); 
+        alunoTurma.getEstado().setNota(db.getTurmas().get(escolhaTurma), nota.getNota1()); 
     }
 
     public static void mostrarEstatistica() {
